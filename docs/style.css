@@ -1,7 +1,8 @@
 :root{
   color-scheme:dark;
   --bg:#0d1117;--surface:#151b24;--ink:#e8ecf2;--muted:#9aa5b6;--line:#252e3c;
-  --accent:#b48cff;--accent-dark:#c9a9ff;--accent-ink:#150d26;--accent-soft:rgba(180,140,255,.14);
+  /* Updated Accent Colors for #50C878 */
+  --accent:#50C878;--accent-dark:#6ee096;--accent-ink:#0d1117;--accent-soft:rgba(80, 200, 120, .14);
   --term:#090c11;--term-line:#252e3c;--term-text:#d6deeb;--term-dim:#7d8aa0;--term-green:#7bd88f;--term-red:#ff7a7a;--term-blue:#82aaff;
   --font:"Avenir Next","Segoe UI",Cantarell,system-ui,sans-serif;
   --mono:ui-monospace,"JetBrains Mono","Cascadia Code","DejaVu Sans Mono",Menlo,monospace;
