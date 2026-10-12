@@ -1,77 +1,259 @@
-cd ~/git/fun-cli/docs
-cat << 'EOF' > index.html
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Terminal Experience Studio</title>
+    <meta name="description" content="A friendly Linux desktop app that customises your terminal without editing config files. Live previews, one-click Apply, and Undo for everything.">
     <link rel="stylesheet" href="style.css">
     <link rel="icon" href="screenshots/dashboard.png" type="image/png">
 </head>
 <body>
-    <header>
-        <div class="badge-container">
-            <span class="badge">v1.0.0</span>
-            <span class="badge">Python 3.10+</span>
-            <span class="badge">GTK4 + Libadwaita</span>
+    <a class="skip" href="#main">Skip to content</a>
+    <nav class="nav" aria-label="Main">
+        <div class="wrap">
+            <a class="brand" href="#top"><i>&gt;_</i> Terminal Experience Studio</a>
+            <button class="menu" aria-expanded="false" aria-controls="links">Menu</button>
+            <div class="links" id="links">
+                <a href="#features">Features</a>
+                <a href="#safety">Safety</a>
+                <a href="#install">Install</a>
+                <a href="#screenshots">Screenshots</a>
+                <a href="https://github.com/AbduLz0/fun-cli">GitHub</a>
+                <a class="btn primary small" href="https://github.com/AbduLz0/fun-cli/releases/latest">Download v1.0.0</a>
+            </div>
         </div>
-        <h1>Terminal Experience Studio</h1>
-        <p class="tagline">Bring your command line to life.</p>
-        <p class="description">A friendly Linux desktop app that customises your terminal without editing config files. Live previews, one-click Apply, and Undo for everything.</p>
-        <div class="buttons">
-            <a href="https://github.com/AbduLz0/fun-cli" class="btn primary">View on GitHub</a>
-            <a href="https://github.com/AbduLz0/fun-cli/releases/latest" class="btn secondary">Download v1.0.0</a>
-        </div>
-    </header>
+    </nav>
 
-    <section class="hero-image">
-        <img src="screenshots/dashboard.png" alt="Terminal Experience Studio Dashboard">
-    </section>
+    <main id="main">
+        <header class="hero" id="top">
+            <div class="wrap">
+                <div>
+                    <div class="pills">
+                        <span class="pill">v1.0.0</span>
+                        <span class="pill">Python 3.10+</span>
+                        <span class="pill">GTK4 + Libadwaita</span>
+                    </div>
+                    <h1>Bring your command line to life.</h1>
+                    <p class="lead">A friendly Linux desktop app that customises your terminal without editing config files.</p>
+                    <p class="sub">Use switches, sliders and presets instead of hunting through hidden files. See exactly what you'll get before anything touches your system, and undo any change.</p>
+                    <div class="cta">
+                        <a class="btn primary" href="https://github.com/AbduLz0/fun-cli/releases/latest">Download v1.0.0</a>
+                        <a class="btn secondary" href="https://github.com/AbduLz0/fun-cli">View on GitHub</a>
+                    </div>
+                </div>
+                <div class="term" role="img" aria-label="Illustration of a customised terminal with a greeting, a prompt and a failed command">
+                    <div class="term-bar"><b></b><b></b><b></b><span>Terminal</span></div>
+<pre><span class="g">Good evening, sam.</span> Welcome back to <span class="b">studio</span>.
+<span class="d">Tip: press Ctrl+R to search your history.</span>
 
-    <section class="features">
-        <h2>Features</h2>
-        <div class="grid">
-            <div class="card">
-                <h3>✨ Welcome & MOTD</h3>
-                <p>Choose how your terminal greets you. Write a greeting, pick a mood, add tips, and see a live preview.</p>
+<span class="g">sam@studio</span> <span class="b">~/projects</span> $ ls
+notes.txt  src  README.md
+<span class="g">sam@studio</span> <span class="b">~/projects</span> $ gti status
+<span class="r">gti: command not found</span>
+<span class="r">[exit 127]</span> <span class="g">sam@studio</span> <span class="b">~/projects</span> $ <span class="caret"></span></pre>
+                </div>
             </div>
-            <div class="card">
-                <h3>🎨 Terminal Appearance</h3>
-                <p>10 theme presets, colors, fonts, cursor shapes, and opacity. Adapters for GNOME Terminal, Kitty, Alacritty, and Konsole.</p>
+            <div class="wrap hero-shot">
+                <div class="shot"><img src="screenshots/dashboard.png" alt="Terminal Experience Studio dashboard"></div>
             </div>
-            <div class="card">
-                <h3>⚡ Prompt Designer</h3>
-                <p>Pick a prompt style with a live preview. Minimal, Classic, and Two-line work in plain Bash. Starship support included.</p>
-            </div>
-            <div class="card">
-                <h3>🖼️ ASCII Art Studio</h3>
-                <p>Turn any picture into text art with live controls. Conversion happens entirely on your computer.</p>
-            </div>
-            <div class="card">
-                <h3>🤖 AI Companion</h3>
-                <p>Offline-first AI companion with optional Groq, OpenAI, OpenRouter, and Ollama support. No internet required at startup.</p>
-            </div>
-            <div class="card">
-                <h3>🛡️ Backups & Recovery</h3>
-                <p>Every change creates a timestamped backup. Restore any backup, remove everything, or switch between dark and light mode.</p>
-            </div>
-        </div>
-    </section>
+        </header>
 
-    <section class="gallery">
-        <h2>Screenshots</h2>
-        <div class="gallery-grid">
-            <img src="screenshots/welcome.png" alt="Welcome & MOTD">
-            <img src="screenshots/appearance.png" alt="Terminal Appearance">
-            <img src="screenshots/ascii.png" alt="ASCII Art Studio">
-            <img src="screenshots/companion.png" alt="AI Companion">
-        </div>
-    </section>
+        <section class="section" id="features">
+            <div class="wrap">
+                <div class="head">
+                    <h2>Everything your terminal shows, in one place</h2>
+                    <p>Each page has a live preview. Nothing changes on your system until you press Apply.</p>
+                </div>
+
+                <article class="feature">
+                    <div class="copy">
+                        <h3>Welcome &amp; MOTD</h3>
+                        <p>Choose how your terminal greets you. Write a greeting using <code>{user}</code>, <code>{host}</code> and <code>{daypart}</code>, pick one of 24 moods, and add rotating tips, an extra message and an optional Fastfetch summary.</p>
+                        <p>The preview types itself out just like the real thing.</p>
+                    </div>
+                    <div class="shot"><img src="screenshots/welcome.png" alt="Welcome and MOTD page" loading="lazy"></div>
+                </article>
+
+                <article class="feature">
+                    <div class="copy">
+                        <h3>Terminal Appearance</h3>
+                        <p>10 theme presets, colours, a 16-colour palette, font, size, cursor shape, opacity and background image. Themes can be exported and imported as small files.</p>
+                        <p>The app tells you plainly when a terminal can't do something, for example GNOME Terminal has no background-image setting.</p>
+                    </div>
+                    <div class="shot"><img src="screenshots/appearance.png" alt="Terminal Appearance page" loading="lazy"></div>
+                </article>
+
+                <article class="feature">
+                    <div class="copy">
+                        <h3>Prompt Designer</h3>
+                        <p>Pick a prompt style with a live preview that shows both a normal command and a failed one.</p>
+                        <p>Minimal, Classic and Two-line work in plain Bash with nothing to install. Two more styles use <a href="https://starship.rs">Starship</a> if you have it.</p>
+                    </div>
+                    <div class="shot"><img src="screenshots/prompt.png" alt="Prompt Designer page" loading="lazy"></div>
+                </article>
+
+                <article class="feature">
+                    <div class="copy">
+                        <h3>ASCII Art Studio</h3>
+                        <p>Start from the built-in gallery, or turn any picture into text art with live controls for width, contrast, brightness, invert and character style.</p>
+                        <p>Conversion happens on your computer, and the art can appear above your greeting when a terminal opens.</p>
+                    </div>
+                    <div class="shot"><img src="screenshots/ascii.png" alt="ASCII Art Studio page" loading="lazy"></div>
+                </article>
+
+                <article class="feature">
+                    <div class="copy">
+                        <h3>AI Companion</h3>
+                        <p>Everything works offline: built-in tips and a command explainer that warns you about risky commands such as <code>rm -rf /</code>.</p>
+                        <p>If you like, connect Groq, OpenAI, OpenRouter or a local Ollama to write greetings in a personality you choose. Greetings are saved to a plain file, so opening a terminal never waits on the internet.</p>
+                    </div>
+                    <div class="shot"><img src="screenshots/companion.png" alt="AI Companion page" loading="lazy"></div>
+                </article>
+
+                <article class="feature">
+                    <div class="copy">
+                        <h3>Backups &amp; Recovery</h3>
+                        <p>Restore any backup, remove everything the app added, switch between dark and light mode, or turn off animations.</p>
+                        <p>Use <code>Ctrl+1</code> to <code>Ctrl+7</code> to jump between pages.</p>
+                    </div>
+                    <div class="shot"><img src="screenshots/settings.png" alt="Backups and Settings page" loading="lazy"></div>
+                </article>
+            </div>
+        </section>
+
+        <section class="section alt" id="terminals">
+            <div class="wrap">
+                <div class="head">
+                    <h2>Works with the terminal you already use</h2>
+                    <p>Each terminal has its own adapter that declares exactly what it supports. Themes are applied the right way for each one.</p>
+                </div>
+                <div class="table-wrap">
+                    <table>
+                        <thead><tr><th scope="col">Terminal</th><th scope="col">Colours</th><th scope="col">Palette</th><th scope="col">Font</th><th scope="col">Cursor</th><th scope="col">Opacity</th><th scope="col">Background image</th></tr></thead>
+                        <tbody>
+                            <tr><th scope="row">GNOME Terminal</th><td>Yes</td><td>Yes</td><td>Yes</td><td>Yes</td><td>Yes</td><td class="no">No</td></tr>
+                            <tr><th scope="row">Kitty</th><td>Yes</td><td>Yes</td><td>Yes</td><td>Yes</td><td>Yes</td><td>Yes (PNG)</td></tr>
+                            <tr><th scope="row">Alacritty</th><td>Yes</td><td>Yes</td><td>Yes</td><td>Yes</td><td>Yes</td><td class="no">No</td></tr>
+                            <tr><th scope="row">Konsole</th><td>Yes</td><td>Yes</td><td>Yes</td><td>Yes</td><td>Yes</td><td class="no">No</td></tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </section>
+
+        <section class="section" id="safety">
+            <div class="wrap">
+                <div class="head">
+                    <h2>Careful with your shell</h2>
+                    <p>Changing a shell's startup file is a little risky, so the app is built to be careful.</p>
+                </div>
+                <div class="safety">
+                    <div><strong>Backup first</strong><span>Every change creates a timestamped backup, and every apply has an Undo.</span></div>
+                    <div><strong>Only our section</strong><span><code>~/.bashrc</code> is edited only between marker lines. If the markers are damaged, the app stops and changes nothing.</span></div>
+                    <div><strong>Safe writes</strong><span>Files are written atomically and symlinks are respected, so dotfile managers keep working.</span></div>
+                    <div><strong>No admin rights</strong><span>Nothing needs <code>sudo</code>. Only interactive shells are affected.</span></div>
+                    <div><strong>Fast and offline at startup</strong><span>Opening a terminal makes no network calls.</span></div>
+                    <div><strong>Text can't run code</strong><span>Anything you type is quoted and stripped of control characters. Git branch names in the prompt are filtered too.</span></div>
+                    <div><strong>Your Starship config is safe</strong><span>The app uses its own config file and never overwrites yours.</span></div>
+                    <div><strong>Keys stay private</strong><span>API keys are never written to settings or shell files. They live in memory, or in your desktop keyring if you switch that on.</span></div>
+                </div>
+                <p class="note"><strong>Undoing by hand:</strong> the app only touches the lines between <code># &gt;&gt;&gt; Terminal Experience Studio &gt;&gt;&gt;</code> and <code># &lt;&lt;&lt; Terminal Experience Studio &lt;&lt;&lt;</code>, plus an optional second block ending in <code>: prompt</code>. Backups are in <code>~/.local/share/terminal-experience-studio/backups/</code>.</p>
+            </div>
+        </section>
+
+        <section class="section alt" id="install">
+            <div class="wrap">
+                <div class="head">
+                    <h2>Install and get started</h2>
+                    <p>Requires a GNOME-based Linux desktop (built for Zorin OS 18 / Ubuntu 24.04), Python 3.10 or newer, and Bash.</p>
+                </div>
+                <ol class="steps">
+                    <li>
+                        <h3>Install dependencies</h3>
+                        <p>Usually already installed on Zorin OS.</p>
+                        <div class="code">sudo apt install python3-gi gir1.2-gtk-4.0 gir1.2-adw-1 librsvg2-common</div>
+                    </li>
+                    <li>
+                        <h3>Get the app</h3>
+                        <div class="code">git clone https://github.com/AbduLz0/fun-cli.git
+cd fun-cli</div>
+                    </li>
+                    <li>
+                        <h3>Run it</h3>
+                        <p>Try it straight from the folder, or install it for your user (menu entry and launcher, no sudo).</p>
+                        <div class="code">./run.sh
+# or
+./install.sh</div>
+                    </li>
+                    <li>
+                        <h3>Apply your first change</h3>
+                        <p>Open <strong>Welcome &amp; MOTD</strong>, pick a mood and write a greeting. Press <strong>Apply to Bash</strong> and confirm. A backup is made first. Open a new terminal to see the result. Changed your mind? Press <strong>Undo</strong>.</p>
+                        <p>For terminal colours and fonts, open <strong>Terminal Appearance</strong>, choose your terminal and press <strong>Apply theme</strong>.</p>
+                    </li>
+                </ol>
+                <div class="two">
+                    <div>
+                        <h3>Optional extras</h3>
+                        <ul>
+                            <li><code>starship</code> for the Starship prompts</li>
+                            <li><code>fastfetch</code> for the system summary</li>
+                            <li><code>libsecret-tools</code> to keep API keys in your desktop keyring</li>
+                        </ul>
+                    </div>
+                    <div>
+                        <h3>Known limits</h3>
+                        <ul>
+                            <li>Bash only. Zsh and Fish are not implemented yet.</li>
+                            <li>Konsole needs one manual step: choose the "Terminal Experience Studio" profile from its Settings menu.</li>
+                            <li>Starship styles only take effect once Starship is installed.</li>
+                            <li>AI is called only when you press a button, never when a terminal starts.</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="section" id="screenshots">
+            <div class="wrap">
+                <div class="head"><h2>Screenshots</h2></div>
+                <div class="gallery">
+                    <figure><div class="shot"><img src="screenshots/welcome.png" alt="Welcome and MOTD page" loading="lazy"></div><figcaption>Welcome &amp; MOTD</figcaption></figure>
+                    <figure><div class="shot"><img src="screenshots/appearance.png" alt="Terminal Appearance page" loading="lazy"></div><figcaption>Terminal Appearance</figcaption></figure>
+                    <figure><div class="shot"><img src="screenshots/ascii.png" alt="ASCII Art Studio page" loading="lazy"></div><figcaption>ASCII Art Studio</figcaption></figure>
+                    <figure><div class="shot"><img src="screenshots/companion.png" alt="AI Companion page" loading="lazy"></div><figcaption>AI Companion</figcaption></figure>
+                </div>
+            </div>
+        </section>
+
+        <section class="final">
+            <div class="wrap">
+                <h2>Make your terminal yours</h2>
+                <p>Every change has a backup and an Undo.</p>
+                <div class="cta">
+                    <a class="btn primary" href="https://github.com/AbduLz0/fun-cli/releases/latest">Download v1.0.0</a>
+                    <a class="btn secondary" href="https://github.com/AbduLz0/fun-cli">View on GitHub</a>
+                </div>
+            </div>
+        </section>
+    </main>
 
     <footer>
-        <p>Made with ❤️ for the Linux community. <a href="https://github.com/AbduLz0/fun-cli">Contribute on GitHub</a></p>
+        <div class="wrap">
+            <span>Terminal Experience Studio v1.0.0. Made for the Linux community.</span>
+            <span><a href="https://github.com/AbduLz0/fun-cli">Contribute on GitHub</a></span>
+        </div>
     </footer>
+
+    <script>
+        var b = document.querySelector('.menu'), l = document.getElementById('links');
+        b.addEventListener('click', function () {
+            var o = l.classList.toggle('open');
+            b.setAttribute('aria-expanded', o);
+        });
+        l.addEventListener('click', function (e) {
+            if (e.target.tagName === 'A') { l.classList.remove('open'); b.setAttribute('aria-expanded', 'false'); }
+        });
+    </script>
 </body>
 </html>
-EOF
