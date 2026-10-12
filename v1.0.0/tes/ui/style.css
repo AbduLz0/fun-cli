@@ -1,0 +1,130 @@
+/* Terminal Experience Studio - GTK4 / Libadwaita styling.
+   The accent colour is injected at runtime (see app.py) so it can change live. */
+
+window.tes-window { background: @window_bg_color; }
+
+/* ---------- sidebar ---------- */
+.tes-sidebar { background: alpha(@window_fg_color, 0.03); }
+.tes-brand { padding: 22px 18px 10px 18px; }
+.tes-brand-face { font-family: monospace; font-weight: 800; font-size: 20px; color: @accent_color; }
+.tes-brand-name { font-weight: 800; font-size: 14px; letter-spacing: 0.2px; }
+.tes-brand-sub  { font-size: 11px; opacity: 0.6; }
+
+.tes-nav row {
+  margin: 2px 10px; padding: 3px 4px; border-radius: 12px;
+  transition: background 180ms ease, color 180ms ease;
+}
+.tes-nav row:hover { background: alpha(@window_fg_color, 0.06); }
+.tes-nav row:selected { background: alpha(@accent_bg_color, 0.20); color: @accent_color; }
+.tes-nav row:selected image { color: @accent_color; }
+.tes-nav row label { font-weight: 600; }
+.tes-nav row image { opacity: 0.85; }
+
+/* ---------- typography ---------- */
+.tes-title    { font-size: 26px; font-weight: 800; letter-spacing: -0.3px; }
+.tes-subtitle { font-size: 14px; opacity: 0.72; }
+.tes-eyebrow  { font-size: 11px; font-weight: 800; letter-spacing: 1.4px; color: @accent_color; }
+.tes-section  { font-size: 15px; font-weight: 700; }
+.tes-mono     { font-family: monospace; }
+
+/* ---------- hero (dashboard) ---------- */
+.tes-hero {
+  border-radius: 22px; padding: 6px;
+  background-image: linear-gradient(135deg, alpha(@accent_bg_color, 0.20), alpha(@window_fg_color, 0.04) 60%);
+  border: 1px solid alpha(@accent_bg_color, 0.30);
+  box-shadow: 0 10px 40px alpha(@accent_bg_color, 0.10);
+}
+.tes-hero-face { font-family: monospace; font-weight: 800; font-size: 54px; color: @accent_color; }
+.tes-hero-title { font-size: 28px; font-weight: 800; letter-spacing: -0.4px; }
+.tes-hero-sub { font-size: 14px; opacity: 0.78; }
+
+/* ---------- chips ---------- */
+.tes-chip {
+  padding: 4px 11px; border-radius: 999px; font-size: 12px; font-weight: 600;
+  background: alpha(@window_fg_color, 0.08);
+  transition: background 200ms ease;
+}
+.tes-chip.ok   { background: alpha(@success_bg_color, 0.22); color: @success_color; }
+.tes-chip.warn { background: alpha(@warning_bg_color, 0.22); color: @warning_color; }
+.tes-chip.off  { opacity: 0.65; }
+
+/* ---------- tiles & cards ---------- */
+.tes-tile {
+  padding: 16px 16px; border-radius: 18px; border: 1px solid alpha(@window_fg_color, 0.07);
+  background: alpha(@window_fg_color, 0.045);
+  transition: background 220ms ease, box-shadow 260ms ease, border-color 220ms ease;
+}
+.tes-tile:hover {
+  background: alpha(@accent_bg_color, 0.14); border-color: alpha(@accent_bg_color, 0.55);
+  box-shadow: 0 8px 26px alpha(@accent_bg_color, 0.22);
+}
+.tes-tile:active { background: alpha(@accent_bg_color, 0.24); }
+.tes-tile-icon { color: @accent_color; }
+.tes-tile-title { font-weight: 700; font-size: 15px; }
+.tes-tile-desc  { font-size: 12px; opacity: 0.7; }
+
+.tes-card {
+  border-radius: 18px; padding: 14px; border: 1px solid alpha(@window_fg_color, 0.07);
+  background: alpha(@window_fg_color, 0.04);
+}
+
+.tes-card-btn, .tes-face-btn {
+  border-radius: 14px; background: alpha(@window_fg_color, 0.04); padding: 0;
+  border: 2px solid transparent; box-shadow: none;
+  transition: background 200ms ease, border-color 200ms ease, box-shadow 240ms ease;
+}
+.tes-card-btn:hover, .tes-face-btn:hover { background: alpha(@accent_bg_color, 0.12); }
+.tes-card-btn:checked, .tes-face-btn:checked {
+  background: alpha(@accent_bg_color, 0.20); border-color: @accent_bg_color;
+  box-shadow: 0 0 0 4px alpha(@accent_bg_color, 0.18);
+}
+.tes-face-btn { padding: 8px 12px; min-width: 70px; }
+.tes-face-btn label { font-family: monospace; font-size: 15px; }
+
+/* prompt preset rows */
+.tes-preset-row { border-radius: 14px; margin: 3px 0; transition: background 200ms ease; }
+
+/* ---------- live terminal preview ---------- */
+.tes-term {
+  border-radius: 14px;
+  box-shadow: 0 14px 40px alpha(black, 0.45), 0 0 0 1px alpha(white, 0.08);
+}
+textview.tes-term-text, textview.tes-term-text text { background: transparent; color: inherit; }
+scrolledwindow.tes-term-scroll, scrolledwindow.tes-term-scroll viewport { background: transparent; }
+
+/* ---------- accent swatches ---------- */
+.tes-accent-dot {
+  min-width: 30px; min-height: 30px; border-radius: 999px; padding: 0;
+  border: 3px solid transparent; transition: border-color 180ms ease, box-shadow 220ms ease;
+}
+.tes-accent-dot:hover { box-shadow: 0 0 0 4px alpha(@window_fg_color, 0.15); }
+.tes-accent-dot:checked { border-color: @window_fg_color; }
+
+/* ---------- action bar ---------- */
+.tes-actionbar {
+  padding: 10px 18px; background: alpha(@window_bg_color, 0.92);
+  border-top: 1px solid alpha(@window_fg_color, 0.08);
+}
+.tes-dot { min-width: 10px; min-height: 10px; border-radius: 999px; background: alpha(@window_fg_color, 0.35);
+           transition: background 300ms ease, box-shadow 300ms ease; }
+.tes-dot.synced  { background: @success_color;  box-shadow: 0 0 10px alpha(@success_color, 0.7); }
+.tes-dot.pending { background: @warning_color;  box-shadow: 0 0 10px alpha(@warning_color, 0.6); }
+.tes-apply { padding: 9px 22px; border-radius: 12px; font-weight: 700;
+             transition: box-shadow 400ms ease, background 300ms ease; }
+.tes-apply.glow { box-shadow: 0 0 0 6px alpha(@accent_bg_color, 0.35), 0 0 34px alpha(@accent_bg_color, 0.8); }
+.tes-pulse { box-shadow: 0 0 0 5px alpha(@accent_bg_color, 0.45); }
+
+/* ---------- misc ---------- */
+.tes-note { font-size: 12px; opacity: 0.7; }
+.tes-callout {
+  border-radius: 14px; padding: 12px 14px; background: alpha(@accent_bg_color, 0.12);
+  border: 1px solid alpha(@accent_bg_color, 0.35);
+}
+.tes-callout.warn { background: alpha(@warning_bg_color, 0.14); border-color: alpha(@warning_bg_color, 0.45); }
+.tes-result {
+  border-radius: 14px; padding: 14px; background: alpha(@window_fg_color, 0.05);
+  border: 1px solid alpha(@window_fg_color, 0.08);
+}
+.tes-code { font-family: monospace; font-size: 13px; }
+
+.tes-swatch-art { border-radius: 9px; }

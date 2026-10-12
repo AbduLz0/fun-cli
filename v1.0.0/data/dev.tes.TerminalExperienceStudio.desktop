@@ -1,0 +1,11 @@
+[Desktop Entry]
+Type=Application
+Name=Terminal Experience Studio
+GenericName=Terminal Customizer
+Comment=Bring your command line to life
+Exec=@EXEC@
+Icon=dev.tes.TerminalExperienceStudio
+Terminal=false
+Categories=GNOME;GTK;Settings;Utility;
+Keywords=terminal;bash;prompt;theme;motd;ascii;
+StartupNotify=true
