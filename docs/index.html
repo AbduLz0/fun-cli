@@ -1,0 +1,77 @@
+cd ~/git/fun-cli/docs
+cat << 'EOF' > index.html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Terminal Experience Studio</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="icon" href="screenshots/dashboard.png" type="image/png">
+</head>
+<body>
+    <header>
+        <div class="badge-container">
+            <span class="badge">v1.0.0</span>
+            <span class="badge">Python 3.10+</span>
+            <span class="badge">GTK4 + Libadwaita</span>
+        </div>
+        <h1>Terminal Experience Studio</h1>
+        <p class="tagline">Bring your command line to life.</p>
+        <p class="description">A friendly Linux desktop app that customises your terminal without editing config files. Live previews, one-click Apply, and Undo for everything.</p>
+        <div class="buttons">
+            <a href="https://github.com/AbduLz0/fun-cli" class="btn primary">View on GitHub</a>
+            <a href="https://github.com/AbduLz0/fun-cli/releases/latest" class="btn secondary">Download v1.0.0</a>
+        </div>
+    </header>
+
+    <section class="hero-image">
+        <img src="screenshots/dashboard.png" alt="Terminal Experience Studio Dashboard">
+    </section>
+
+    <section class="features">
+        <h2>Features</h2>
+        <div class="grid">
+            <div class="card">
+                <h3>✨ Welcome & MOTD</h3>
+                <p>Choose how your terminal greets you. Write a greeting, pick a mood, add tips, and see a live preview.</p>
+            </div>
+            <div class="card">
+                <h3>🎨 Terminal Appearance</h3>
+                <p>10 theme presets, colors, fonts, cursor shapes, and opacity. Adapters for GNOME Terminal, Kitty, Alacritty, and Konsole.</p>
+            </div>
+            <div class="card">
+                <h3>⚡ Prompt Designer</h3>
+                <p>Pick a prompt style with a live preview. Minimal, Classic, and Two-line work in plain Bash. Starship support included.</p>
+            </div>
+            <div class="card">
+                <h3>🖼️ ASCII Art Studio</h3>
+                <p>Turn any picture into text art with live controls. Conversion happens entirely on your computer.</p>
+            </div>
+            <div class="card">
+                <h3>🤖 AI Companion</h3>
+                <p>Offline-first AI companion with optional Groq, OpenAI, OpenRouter, and Ollama support. No internet required at startup.</p>
+            </div>
+            <div class="card">
+                <h3>🛡️ Backups & Recovery</h3>
+                <p>Every change creates a timestamped backup. Restore any backup, remove everything, or switch between dark and light mode.</p>
+            </div>
+        </div>
+    </section>
+
+    <section class="gallery">
+        <h2>Screenshots</h2>
+        <div class="gallery-grid">
+            <img src="screenshots/welcome.png" alt="Welcome & MOTD">
+            <img src="screenshots/appearance.png" alt="Terminal Appearance">
+            <img src="screenshots/ascii.png" alt="ASCII Art Studio">
+            <img src="screenshots/companion.png" alt="AI Companion">
+        </div>
+    </section>
+
+    <footer>
+        <p>Made with ❤️ for the Linux community. <a href="https://github.com/AbduLz0/fun-cli">Contribute on GitHub</a></p>
+    </footer>
+</body>
+</html>
+EOF
