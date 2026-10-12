@@ -7,7 +7,7 @@
 A friendly Linux desktop app that customises your terminal without editing config files.
 Live previews, one-click Apply, and Undo for everything.
 
-![Version](https://img.shields.io/badge/version-1.0.0-7bd88f)
+![Version](https://img.shields.io/badge/version-1.0.1-7bd88f)
 ![Python](https://img.shields.io/badge/python-3.10%2B-blue)
 ![GTK](https://img.shields.io/badge/GTK4-Libadwaita-4a86cf)
 ![Platform](https://img.shields.io/badge/platform-Zorin%20%7C%20Ubuntu%20%7C%20GNOME-orange)

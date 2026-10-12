@@ -6,7 +6,7 @@ from pathlib import Path
 
 APP_ID = "dev.tes.TerminalExperienceStudio"
 APP_NAME = "Terminal Experience Studio"
-VERSION = "0.2.0"
+VERSION = "1.0.1"
 
 # Shell expression for our config dir, usable inside ~/.bashrc (no trailing quote).
 SHELL_CONFIG_DIR = "${XDG_CONFIG_HOME:-$HOME/.config}/terminal-experience-studio"
