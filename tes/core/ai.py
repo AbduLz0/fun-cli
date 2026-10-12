@@ -21,7 +21,7 @@ PROVIDERS = {
     "Groq": {
         "url": "https://console.groq.com/keys",
         "endpoint": "https://api.groq.com/openai/v1/chat/completions",
-        "model": "llama-3.3-70b-versatile", "needs_key": True,
+        "model": "openai/gpt-oss-120b", "needs_key": True,
     },
     "OpenAI": {
         "url": "https://platform.openai.com/api-keys",
@@ -39,6 +39,12 @@ PROVIDERS = {
         "model": "llama3.2", "needs_key": False,
     },
 }
+
+# Cloudflare (used by Groq, OpenAI, OpenRouter) blocks Python's default
+# "Python-urllib/3.x" User-Agent with HTTP 403 + error code 1010. A distinct,
+# app-specific User-Agent passes the WAF check. Kept as a constant so the
+# header value stays consistent across every request we make.
+_USER_AGENT = "TerminalExperienceStudio/1.0 (+https://github.com/AbduLz0/fun-cli)"
 
 
 class AIError(Exception):
@@ -88,17 +94,31 @@ def chat(provider: str, model: str, key: str, system: str, user: str, max_tokens
         raise AIError("Add an API key first.")
     payload = {"model": model or info["model"], "temperature": temperature, "max_tokens": max_tokens,
                "messages": [{"role": "system", "content": system}, {"role": "user", "content": user}]}
-    headers = {"Content-Type": "application/json"}
+    headers = {
+        "Content-Type": "application/json",
+        "Accept": "application/json",
+        "User-Agent": _USER_AGENT,
+    }
     if key:
         headers["Authorization"] = "Bearer " + key
-    req = urllib.request.Request(info["endpoint"], data=json.dumps(payload).encode(), headers=headers, method="POST")
+    req = urllib.request.Request(
+        info["endpoint"],
+        data=json.dumps(payload).encode("utf-8"),
+        headers=headers,
+        method="POST",
+    )
     try:
         with urllib.request.urlopen(req, timeout=timeout) as resp:
             data = json.loads(resp.read().decode("utf-8"))
         return str(data["choices"][0]["message"]["content"]).strip()
     except urllib.error.HTTPError as exc:
         detail = exc.read().decode("utf-8", "replace")[:300]
-        hint = " (check that the key is correct)" if exc.code in (401, 403) else ""
+        if exc.code == 403 and "1010" in detail:
+            hint = " (the provider's firewall blocked the request — update the app or try again later)"
+        elif exc.code in (401, 403):
+            hint = " (check that the key is correct)"
+        else:
+            hint = ""
         raise AIError(f"The provider answered HTTP {exc.code}{hint}. {detail}") from exc
     except urllib.error.URLError as exc:
         local = " Is Ollama running?" if "localhost" in info["endpoint"] else " Check your internet connection."
