@@ -5,3 +5,6 @@ venv/
 .env
 *.zip
 *.log
+.env.*
+.pytest_cache/
+!.env.example
