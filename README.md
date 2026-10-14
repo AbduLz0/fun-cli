@@ -201,6 +201,3 @@ The network tests start a fake AI server on `127.0.0.1:11434`; stop a real Ollam
 
 See [CHANGELOG.md](CHANGELOG.md).
 
-## License
-
-Add your chosen license here and include a `LICENSE` file in the repo.
