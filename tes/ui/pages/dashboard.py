@@ -11,7 +11,7 @@ gi.require_version("Gtk", "4.0")
 gi.require_version("Adw", "1")
 from gi.repository import GLib, Gtk  # noqa: E402
 
-from ...core import ai, bashconfig, content, preview
+from ...core import content, pack, preview
 from .. import anim
 from ..common import Page, label
 from ..widgets import Rain, TerminalPreview
@@ -127,12 +127,14 @@ class DashboardPage(Page):
             ("Fastfetch installed" if shutil.which("fastfetch") else "Fastfetch not installed", "ok" if shutil.which("fastfetch") else "off"),
             ("AI companion on" if s.get("ai_enabled") else "AI companion off (optional)", "ok" if s.get("ai_enabled") else "off"),
         ]
+        if s.get("roast_mistakes"):
+            chips.append((f"Roasts: {s.get('roast_level', 'Spicy')}", "warn"))
         for text, kind in chips:
             self.chips.append(self._chip(text, kind))
         self.mini.set_accent(s["accent"])
         self.rain.set_accent(s["accent"])
         self.face.set_text(s["face"])
-        self.mini.set_lines(preview.welcome_lines(s, bashconfig.read_greetings()), animate=False)
+        self.mini.set_lines(preview.welcome_lines(s, pack.preview_pairs(s)), animate=False)
 
     def on_state(self, source: str) -> None:
         self.refresh()
@@ -140,7 +142,7 @@ class DashboardPage(Page):
     def on_shown(self) -> None:
         super().on_shown()
         self.mini.set_theme(self.win.current_theme(), animate=False)
-        self.mini.set_lines(preview.welcome_lines(self.state.s, bashconfig.read_greetings()), animate=True)
+        self.mini.set_lines(preview.welcome_lines(self.state.s, pack.preview_pairs(self.state.s)), animate=True)
         self.face_motion.bob()
 
     # ------------------------------------------------------------------ idle personality

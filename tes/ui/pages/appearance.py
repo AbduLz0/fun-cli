@@ -11,7 +11,7 @@ gi.require_version("Pango", "1.0")
 from gi.repository import Adw, Gdk, Gio, GLib, Gtk, Pango  # noqa: E402
 
 from ... import adapters
-from ...core import backups, themes
+from ...core import ai, assistant, backups, themes
 from ...core.themes import PALETTE_NAMES, Theme
 from ..common import Page, combo_row, group, icon_button, label, run_async
 from ..widgets import ThemeCard, TerminalPreview, rgba
@@ -89,6 +89,21 @@ class AppearancePage(Page):
             strip.append(c)
         self.add(Gtk.ScrolledWindow(child=strip, vscrollbar_policy=Gtk.PolicyType.NEVER,
                                     hscrollbar_policy=Gtk.PolicyType.AUTOMATIC, propagate_natural_height=True))
+
+        # ---- AI theme
+        ig = group("Theme from an idea", "Describe a mood or place and the AI designs a colour theme. Checked for readability before use.")
+        self.idea = Adw.EntryRow(title="Describe it, e.g. cozy autumn forest")
+        self.idea.connect("entry-activated", lambda *_: self._gen_theme())
+        ig.add(self.idea)
+        gr = Adw.ActionRow(title="Design it", subtitle="Needs AI features switched on in AI Companion.")
+        self.gen_theme_btn = Gtk.Button(label="Generate", valign=Gtk.Align.CENTER)
+        self.gen_theme_btn.add_css_class("suggested-action")
+        self.gen_theme_btn.connect("clicked", lambda _b: self._gen_theme())
+        gr.add_suffix(self.gen_theme_btn)
+        ig.add(gr)
+        self.idea_status = label("", "tes-note")
+        self.add(ig)
+        self.add(self.idea_status)
 
         # ---- colours
         cg = group("Colours")
@@ -269,6 +284,38 @@ class AppearancePage(Page):
         self.bg_clear.set_sensitive(ok)
         t = self.theme()
         self.bgrow.set_subtitle((Path(t.bg_image).name if t.bg_image else "PNG recommended.") if ok else f"{a.name} doesn't support background images.")
+
+    # ------------------------------------------------------------------ AI theme
+    def _gen_theme(self) -> None:
+        idea = self.idea.get_text().strip()
+        if not idea:
+            self.idea_status.set_text("Type an idea first, for example: neon city at night.")
+            return
+        st = dict(self.state.s)
+        why = assistant.readiness(st, self.state.api_key)
+        if why:
+            self.idea_status.set_text(why)
+            return
+        system, user = assistant.theme_prompt(idea)
+        base = self.theme()
+        self.gen_theme_btn.set_sensitive(False)
+        self.idea_status.set_text("Designing your theme...")
+
+        def work():
+            raw = ai.chat(st["provider"], st["model"], self.state.api_key, system, user, max_tokens=700, temperature=0.9)
+            return assistant.parse_theme(raw, base)
+
+        def done(theme, err):
+            self.gen_theme_btn.set_sensitive(True)
+            if err:
+                self.idea_status.set_text(str(err))
+                return
+            self.state.update("appearance", theme=theme.to_dict())
+            self._sync_all(theme)
+            self.term.set_theme(theme)
+            self.idea_status.set_text(f"Made \"{theme.name}\". Not happy? Press Generate again for a different take.")
+
+        run_async(work, done)
 
     # ------------------------------------------------------------------ files
     def _choose_bg(self, _b) -> None:

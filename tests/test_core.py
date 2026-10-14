@@ -8,7 +8,7 @@ from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
 
-from tes.core import (asciiart, backups, bashconfig, content, explain, paths, prompts, settings,
+from tes.core import (asciiart, backups, bashconfig, content, explain, pack, paths, prompts, settings,
                       shellblock, themes)
 
 
@@ -183,12 +183,12 @@ class BashTests(Sandbox):
         self.assertNotIn("\x1b", text); self.assertNotIn("\x07", text)
 
     def test_art_and_greeting_pack(self):
-        bashconfig.write_greetings(["Tip one\x1b[2J", "Tip two"])
-        self.assertEqual(bashconfig.read_greetings(), ["Tip one[2J", "Tip two"])
+        pack.set_ai_greetings([{"e": "cool", "t": "Tip one\x1b[2J", "tip": True}, {"e": "happy", "t": "Hello pal", "tip": False}])
         self.apply(art_enabled=True, art_text=" /\\_/\\\n( o.o )", greeting_pack=True, show_date=False)
         r = self.run_bash(paths.bashrc())
         self.assertIn("( o.o )", r.stdout)
-        self.assertRegex(r.stdout, r"Tip (one|two)")
+        self.assertRegex(r.stdout, r"Tip one|Hello pal")
+        self.assertNotIn("\x1b[2J", r.stdout)
 
     def test_disabled_greeting_prints_nothing(self):
         self.apply(enabled=False)

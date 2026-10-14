@@ -128,3 +128,12 @@ scrolledwindow.tes-term-scroll, scrolledwindow.tes-term-scroll viewport { backgr
 .tes-code { font-family: monospace; font-size: 13px; }
 
 .tes-swatch-art { border-radius: 9px; }
+
+/* ---------- companion chat ---------- */
+.tes-bubble { border-radius: 16px; padding: 10px 14px; transition: background 200ms ease; }
+.tes-bubble.user      { background: alpha(@accent_bg_color, 0.22); border: 1px solid alpha(@accent_bg_color, 0.4); }
+.tes-bubble.assistant { background: alpha(@window_fg_color, 0.07); border: 1px solid alpha(@window_fg_color, 0.08); }
+.tes-bubble.system    { background: transparent; padding: 4px 6px; }
+.tes-chat-face { font-family: monospace; font-weight: 800; font-size: 16px; color: @accent_color; }
+.tes-cmd { background: alpha(black, 0.28); border-radius: 8px; padding: 6px 10px; }
+.tes-warn { color: @warning_color; font-size: 12px; font-weight: 600; }

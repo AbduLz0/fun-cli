@@ -6,10 +6,11 @@ from pathlib import Path
 
 APP_ID = "dev.tes.TerminalExperienceStudio"
 APP_NAME = "Terminal Experience Studio"
-VERSION = "1.0.1"
+VERSION = "1.1.0"
 
 # Shell expression for our config dir, usable inside ~/.bashrc (no trailing quote).
 SHELL_CONFIG_DIR = "${XDG_CONFIG_HOME:-$HOME/.config}/terminal-experience-studio"
+SHELL_TES_BIN = "${XDG_DATA_HOME:-$HOME/.local/share}/terminal-experience-studio/bin/tes"
 
 
 def home() -> Path:
@@ -31,6 +32,32 @@ def data_home() -> Path:
 
 def config_dir() -> Path:
     return config_home() / "terminal-experience-studio"
+
+
+def cache_dir() -> Path:
+    return _xdg("XDG_CACHE_HOME", ".cache") / "terminal-experience-studio"
+
+
+def convo_file() -> Path:
+    """Conversation memory for `tes reply` (cache, owner-only)."""
+    return cache_dir() / "conversation.json"
+
+
+def pack_file() -> Path:
+    """User-editable store of AI-written greetings/roasts (the app renders shell files from it)."""
+    return config_dir() / "pack.json"
+
+
+def roasts_file() -> Path:
+    return config_dir() / "roasts.txt"
+
+
+def bin_dir() -> Path:
+    return data_home() / "terminal-experience-studio" / "bin"
+
+
+def tes_bin() -> Path:
+    return bin_dir() / "tes"
 
 
 def settings_file() -> Path:

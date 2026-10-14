@@ -16,7 +16,7 @@ def fill(text: str, user: str, host: str, hour: int) -> str:
     return clean_line(text, 200).replace("{user}", user).replace("{host}", host).replace("{daypart}", daypart(hour))
 
 
-def welcome_lines(s: dict, pack: list[str] | None = None, now: datetime | None = None,
+def welcome_lines(s: dict, pack: list[tuple[str, str]] | None = None, now: datetime | None = None,
                   user: str | None = None, host: str | None = None, rng: random.Random | None = None):
     now = now or datetime.now()
     user = user or os.environ.get("USER", "you")
@@ -35,8 +35,9 @@ def welcome_lines(s: dict, pack: list[str] | None = None, now: datetime | None =
     first.append(("  " + fill(s.get("greeting", ""), user, host, now.hour), "fg"))
     lines.append(first)
     if s.get("greeting_pack"):
-        pool = pack or OFFLINE_GREETINGS
-        lines.append([(rng.choice(pool), "dim")])
+        pool = pack or [("", t) for t in OFFLINE_GREETINGS]
+        face, text = rng.choice(pool)
+        lines.append(([(face + "  ", "accent")] if face else []) + [(text, "dim")])
     for l in s.get("custom_motd", "").strip().splitlines()[:5]:
         lines.append([(clean_line(l, 200), "fg")])
     if s.get("show_host"):

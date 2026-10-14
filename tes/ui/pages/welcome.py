@@ -7,7 +7,7 @@ gi.require_version("Gtk", "4.0")
 gi.require_version("Adw", "1")
 from gi.repository import Adw, GLib, Gtk  # noqa: E402
 
-from ...core import bashconfig, content, preview
+from ...core import content, pack, preview
 from .. import anim
 from ..common import Page, group, label
 from ..widgets import TerminalPreview
@@ -131,7 +131,7 @@ class WelcomePage(Page):
         self._debounce = 0
         s = self.state.s
         self.term.set_accent(s["accent"])
-        self.term.set_lines(preview.welcome_lines(s, bashconfig.read_greetings()), animate=animate)
+        self.term.set_lines(preview.welcome_lines(s, pack.preview_pairs(s)), animate=animate)
         return GLib.SOURCE_REMOVE
 
     def on_shown(self) -> None:

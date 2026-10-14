@@ -252,6 +252,7 @@ class MainWindow(Adw.ApplicationWindow):
         self.confirm("Apply to Bash?", items, "Apply", self._do_apply)
 
     def _do_apply(self) -> None:
+        self.state.flush()  # the `tes` command reads settings.json, so make sure it is current
         try:
             rep = bashconfig.apply(self.state.s)
         except Exception as exc:  # noqa: BLE001

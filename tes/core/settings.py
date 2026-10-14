@@ -34,10 +34,16 @@ DEFAULTS: dict = {
     "terminal_target": "",
     # --- AI (no secrets here)
     "provider": "Groq",
-    "model": "llama-3.3-70b-versatile",
+    "model": "openai/gpt-oss-120b",
     "ai_enabled": False,
     "personality": "Cheerful",
     "keyring_remember": False,
+    # --- companion behaviour (v1.1)
+    "tips_enabled": True,           # show Linux tips in the rotating line
+    "emotion_faces": True,          # faces follow what the companion says
+    "roast_mistakes": False,        # mock mistyped commands (cached lines, works offline)
+    "roast_level": "Spicy",
+    "shell_shortcuts": False,       # `tes`, ask, reply, howto, fix in your shell
     # --- app
     "color_scheme": "dark",
     "reduce_motion": False,
@@ -77,6 +83,11 @@ def sanitize(raw: dict) -> dict:
     if not _HEX.match(out["accent"]):
         out["accent"] = DEFAULTS["accent"]
     out["color_scheme"] = out["color_scheme"] if out["color_scheme"] in ("dark", "light", "system") else "dark"
+    # retired model names -> current default
+    if out["model"] in ("llama-3.3-70b-versatile", "llama3-70b-8192", "mixtral-8x7b-32768"):
+        out["model"] = "openai/gpt-oss-120b"
+    if out["roast_level"] not in ("Gentle teasing", "Spicy", "Unhinged"):
+        out["roast_level"] = "Spicy"
     out["custom_motd"] = out["custom_motd"][:1000]
     out["greeting"] = (out["greeting"] or DEFAULTS["greeting"])[:200]
     out["art_text"] = out["art_text"][:24000]

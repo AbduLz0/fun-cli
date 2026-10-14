@@ -32,6 +32,12 @@ def luminance(h: str) -> float:
     return 0.2126 * f(r) + 0.7152 * f(g) + 0.0722 * f(b)
 
 
+def contrast_ratio(a: str, b: str) -> float:
+    la, lb = luminance(a), luminance(b)
+    hi, lo = max(la, lb), min(la, lb)
+    return (hi + 0.05) / (lo + 0.05)
+
+
 def nearest_256(h: str) -> int:
     """Nearest xterm-256 colour index (cube + greyscale ramp), so prompts work in any terminal."""
     r, g, b = hex_to_rgb(h)
